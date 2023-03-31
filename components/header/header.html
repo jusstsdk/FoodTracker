@@ -1,0 +1,245 @@
+<link rel="stylesheet" href="/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;500&family=Sen:wght@400;700&display=swap"
+      rel="stylesheet">
+
+<div class="title-container">
+    <img src="/assets/logo.png" alt="">
+    <span>FoodTracker</span>
+</div>
+<nav>
+    <button class="menu__button">
+        <img src="../../assets/menu-icon.png" alt="">
+    </button>
+    <ul class="navigation-container">
+        <li><a href="">Home</a></li>
+        <li><a href="../../pages/about_us/about_us.html">About us</a></li>
+        <li><a href="../../pages/contact/contact.html">Contact</a></li>
+        <li><a href="../../pages/recipes/recipes.html">Recipes</a></li>
+    </ul>
+</nav>
+<div class="avatar-container">
+    <a href="../../pages/profile/profile.html" class="circle-image">
+        <img src="/assets/svg/avatar.svg" alt=""/>
+    </a>
+</div>
+
+<div class="authorize-container">
+    <a href="../../pages/login/sign_up.html">Sign up</a>
+    <a href="../../pages/login/sign_in.html">Sign in</a>
+</div>
+
+<style>
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 30px 80px 0 80px;
+    }
+
+    .title-container {
+        width: fit-content;
+        display: flex;
+        gap: 13px;
+    }
+
+    .title-container > img {
+        height: 42px;
+    }
+
+    .title-container > span {
+        font-family: 'Sen', sans-serif;
+        font-weight: 700;
+        font-size: 34px;
+        line-height: 41px;
+        letter-spacing: 0.02em;
+        color: var(--main-brown);
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-self: left;
+    }
+
+    .navigation-container {
+        display: flex;
+        gap: 56px;
+        list-style-type: none;
+        margin-left: 45px;
+    }
+
+    .navigation-container > li > a {
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 16px;
+        letter-spacing: 0.01em;
+        color: var(--main-brown);
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .navigation-container > li > a:hover {
+        font-weight: 500;
+    }
+
+    .menu__button {
+        display: none;
+        margin-right: 15px;
+        position: absolute;
+        top: 40px;
+        right: 120px;
+    }
+
+    .menu__button > img {
+        filter: invert(100%);
+    }
+
+    .avatar-container {
+        display: flex;
+        justify-content: flex-end;
+        flex: 5;
+        width: 100%;
+    }
+
+    .circle-image {
+        align-self: flex-end;
+        text-align: right;
+    }
+
+    .circle-image img {
+        display: inline-block;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 50px;
+        height: 50px;
+        border: 1px solid var(--grey-border);
+    }
+
+    .menu__button {
+        background: none;
+        border: none;
+    }
+
+    .menu__button > img {
+        filter: invert(100%);
+    }
+
+    .authorize-container{
+        display: flex;
+        align-items: center;
+        flex: 5;
+        justify-content: flex-end;
+    }
+
+    .authorize-container > a {
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        text-decoration: none;
+    }
+
+    .authorize-container > a:first-child {
+        color: var(--main-brown);
+        margin-right: 10px;
+    }
+
+    .authorize-container > a:first-child:hover {
+        text-decoration: underline;
+    }
+
+    .authorize-container > a:last-child {
+        color: var(--main-background);
+        background: var(--main-green);
+        padding: 10px 24px;
+        border-radius: 30px;
+    }
+
+    .authorize-container > a:last-child:hover {
+        background: var(--main-green-hover);
+    }
+
+    @media (max-width: 1024px) {
+        .menu__button {
+            display: block;
+        }
+
+        .navigation-container {
+            display: none;
+        }
+
+        nav.show .navigation-container {
+            display: block;
+            width: 100%;
+        }
+
+        header {
+            flex-direction: column;
+        }
+
+        .title-container {
+            align-self: flex-start;
+        }
+
+        nav {
+            width: 100%
+        }
+
+        .navigation-container > li > a {
+            font-size: 24px;
+        }
+
+        .navigation-container > li {
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .navigation-container > li:not(:last-child) {
+            border-bottom: 1px solid var(--main-brown);
+        }
+
+        .circle-image {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+        }
+    }
+</style>
+
+<script>
+    const menuButton = document.querySelector('.menu__button')
+
+    const elem = document.querySelector('nav')
+
+    menuButton.addEventListener('click', () => {
+        elem.classList.toggle('show')
+    })
+
+    const user = JSON.parse(localStorage.getItem("current_user"))
+
+    if (!user) {
+        document.querySelector(".authorize-container").style.display = "flex"
+        document.querySelector(".circle-image").style.display = "none"
+        document.querySelector(".navigation-container li:last-child a").style.visibility = "hidden"
+        document.querySelector(".navigation-container li:first-child a").href = "../../pages/main_page/main_page.html"
+    }
+    else {
+        document.querySelector(".authorize-container").style.display = "none"
+        document.querySelector(".circle-image").style.display = "flex"
+        document.querySelector(".navigation-container li:first-child a").href = "../../pages/authorized/authorized.html"
+
+        if (user.photo) {
+            document.querySelector(".circle-image img").src = user.photo
+        }
+        else {
+            document.querySelector(".circle-image img").src = "../../assets/svg/default-avatar.svg"
+        }
+        console.log(user)
+    }
+
+</script>

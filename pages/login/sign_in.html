@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;500&family=Sen:wght@700&display=swap"
+          rel="stylesheet">
+    <script defer src="sign_in.js"></script>
+</head>
+<body>
+<div class="main-container">
+    <img src="/assets/logo.png" alt="">
+    <h2>Sign in to FoodTracker</h2>
+    <form action="" method="post">
+        <div class="login-container">
+            <label class="hint">Username or email address</label>
+            <label>
+                <input id="username" type="text" name="username" required>
+            </label>
+            <label class="hint">Password</label>
+            <label>
+                <input id="password" type="password" name="password" required>
+            </label>
+            <div class="buttonWrapper">
+                <button type="submit">Sign in</button>
+            </div>
+        </div>
+        <span>New to FoodTracker? <a href="./sign_up.html">Create an account</a></span>
+    </form>
+</div>
+</body>
+</html>

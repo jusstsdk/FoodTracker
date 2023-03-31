@@ -1,0 +1,270 @@
+body {
+    background-color: #FAF8F6;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    /*justify-content: space-between;*/
+    padding: 30px 80px 0 80px;
+}
+
+.title-container {
+    width: fit-content;
+    display: flex;
+    gap: 13px;
+    flex: 1;
+}
+
+.title-container > img {
+    height: 42px;
+}
+
+.title-container > span {
+    font-family: 'Sen', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 41px;
+    letter-spacing: 0.02em;
+    color: #4E4140;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-self: left;
+    flex: 3;
+    margin-left: 45px;
+}
+
+.navigation-container {
+    display: flex;
+    gap: 56px;
+    list-style-type: none;
+}
+
+.navigation-container > li > a {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    color: #4E4140;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.navigation-container > li > a:hover {
+    font-weight: 500;
+}
+
+.menu__button {
+    display: none;
+    margin-right: 15px;
+    position: absolute;
+    top: 40px;
+    right: 120px;
+}
+
+.menu__button > img {
+    filter: invert(100%);
+}
+
+.sign-out {
+    display: flex;
+    justify-content: flex-end;
+    flex: 5;
+    width: 100%;
+}
+
+.sign-out > a {
+    border: 1px solid rgba(78, 65, 64, 0.5);
+    border-radius: 30px;
+    width: fit-content;
+    height: 46px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #4E4140;
+    text-decoration: none;
+    padding: 9px 16px;
+    box-sizing: border-box;
+}
+
+.sign-out > a:hover {
+    color: var(--main-background);
+    background-color: var(--main-brown);
+}
+
+nav > button {
+    background: none;
+    border: none;
+}
+
+nav > button > img {
+    filter: invert(100%);
+}
+
+section {
+    max-width: 1250px;
+    margin: auto;
+}
+
+@media (max-width: 1440px) {
+    section {
+        width: 1200px;
+    }
+}
+
+.profile-info {
+    display: flex;
+    margin-top: 80px;
+    margin-bottom: 100px;
+    justify-content: space-between;
+}
+
+.profile-info p:first-child {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 60px;
+    color: #4E4140;
+    margin-bottom: 0;
+}
+
+.profile-info p:last-child {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #636E75;
+}
+
+.user-info > img {
+    width: 146px;
+    height: 149px;
+    margin-right: 45px;
+}
+
+.user-info {
+    display: flex;
+}
+
+.user-info button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.personalize-user-info input, .personal-stats input {
+    display: none;
+    background: none;
+    border: 1px solid var(--grey-border);
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    color: var(--main-brown);
+    width: 100px;
+    text-align: center;
+    border-bottom: 2px solid var(--secondary-color);
+    margin-right: 10px;
+}
+
+.personalize-user-info.edit input, .personal-stats.edit input {
+    display: block;
+}
+
+.personalize-user-info.edit span, .personal-stats.edit p:last-child {
+    display: none;
+}
+
+.personalize-user-info p:first-child {
+    display: flex;
+}
+
+.personal-stats p:first-child {
+    display: flex;
+    gap: 10px
+}
+
+.statistics {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 80px;
+    padding: 0 70px;
+}
+
+@media (max-width: 1024px) {
+    section {
+        width: 800px;
+    }
+
+    .statistics {
+        flex-direction: column;
+    }
+}
+
+.statistics h1 {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 60px;
+    color: #4E4140;
+}
+
+.statistics > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
+    .menu__button {
+        display: block;
+    }
+
+    .navigation-container {
+        display: none;
+    }
+
+    nav.show .navigation-container {
+        display: block;
+        width: 100%;
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    .title-container {
+        align-self: flex-start;
+    }
+
+    nav {
+        width: 100%
+    }
+
+    .navigation-container > li >a {
+        font-size: 30px;
+    }
+
+    .navigation-container > li {
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .navigation-container > li:not(:last-child) {
+        border-bottom: 1px solid #4E4140;
+    }
+
+    .circle-image {
+        position: absolute;
+        top: 30px;
+        right: 50px;
+    }
+}

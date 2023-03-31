@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;500&family=Sen:wght@700&display=swap"
+          rel="stylesheet">
+    <script defer src="sign_up.js"></script>
+</head>
+<body>
+<div class="main-container">
+    <img src="/assets/logo.png" alt="">
+    <h2>Sign up to FoodTracker</h2>
+    <form name="sign-up" method="post" onsubmit="return validateForm()">
+        <div class="signup-container">
+            <label class="hint">Username</label>
+            <label>
+                <input id="username" type="text" name="username" required>
+            </label>
+            <label class="hint">Email address</label>
+            <label>
+                <input id="email" type="text" name="email" required>
+            </label>
+            <label class="hint">Password</label>
+            <label>
+                <input id="password" type="password" name="password" required>
+            </label>
+            <label class="hint">Confirm password</label>
+            <label>
+                <input id="confirm_password" type="password" name="confirm_password" required>
+            </label>
+            <div class="buttonWrapper">
+                <button type="submit">Sign up</button>
+            </div>
+        </div>
+        <span>Already have an account? <a href="./sign_in.html">Sign in</a></span>
+    </form>
+</div>
+</body>
+</html>

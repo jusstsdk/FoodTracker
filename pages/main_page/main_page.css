@@ -1,0 +1,71 @@
+body {
+    background-color: var(--main-background);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 80px 0 80px;
+}
+
+section {
+    display: flex;
+    padding: 40px 115px 0 115px;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.main-container {
+    max-width: 560px;
+}
+
+.main-container > h1 {
+    font-family: 'Sen', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 84px;
+    line-height: 86px;
+    color: var(--main-brown);
+    margin: 0 0 30px;
+}
+
+.main-container > p {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--secondary-color);
+    margin-bottom: 73px;
+}
+
+.main-container > a {
+    width: fit-content;
+    background: var(--main-red);
+    border-radius: 28px;
+    font-family: 'Sen', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 26px;
+    color: var(--main-background);
+    padding: 23px 37px;
+    margin-top: 50px;
+    text-decoration: none;
+}
+
+.main-container > a:hover {
+    background: var(--main-red-hover);
+}
+
+section > img {
+    width: 580px;
+}
+
+@media (max-width: 1024px) {
+    section > img {
+        width: 400px;
+    }
+}

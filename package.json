@@ -1,0 +1,25 @@
+{
+  "name": "foodtracker",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jusstsdk/FoodTracker.git"
+  },
+  "author": "Angelina Tsareva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jusstsdk/FoodTracker/issues"
+  },
+  "homepage": "https://github.com/jusstsdk/FoodTracker#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.10.0",
+    "postgres": "^3.3.4"
+  }
+}
