@@ -128,6 +128,7 @@ const recipes = [recipe1, recipe2, recipe3, recipe4, recipe5, recipe6]
 container = document.querySelector(".recipes-container")
 
 function createRecipeInfo(recipe) {
+
     const recipe_info = document.createElement("div");
     recipe_info.classList.add("recipe-info");
 
@@ -151,6 +152,15 @@ function createRecipeInfo(recipe) {
     return recipe_info;
 }
 
-recipes.map(recipe => {
-    container.appendChild(createRecipeInfo(recipe))
-})
+// recipes.map(recipe => {
+//     container.appendChild(createRecipeInfo(recipe))
+// })
+
+fetch('http://localhost:3000/recipes')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(recipe => {
+            container.appendChild(createRecipeInfo(recipe))
+        });
+    })
+    .catch(error => console.error(error));

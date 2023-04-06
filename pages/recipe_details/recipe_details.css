@@ -30,6 +30,7 @@ section {
     line-height: 86px;
     color: #4E4140;
     margin: 0 0 55px;
+    max-width: 1000px;
 }
 
 .name-container > h3 {

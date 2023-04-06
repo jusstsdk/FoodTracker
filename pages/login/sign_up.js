@@ -1,6 +1,34 @@
-let users = JSON.parse(localStorage.getItem("users"))
+async function getUsers() {
+    const response = await fetch('http://localhost:3000/users', { method: 'GET' });
+    return await response.json();
+}
+async function fetchUsers() {
+    try {
+        return await getUsers()
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-function validateForm() {
+async function checkEmail(email) {
+    try {
+        const users = await fetchUsers();
+        return users.find(user => user.email === email)
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function checkUsername(username) {
+    try {
+        const users = await fetchUsers();
+        return users.find(user => user.username === username)
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function validateForm() {
     event.preventDefault()
 
     const username = document.getElementById("username").value
@@ -25,29 +53,35 @@ function validateForm() {
         return false;
     }
 
-    if (users) {
-        const result = users.find(user => user.email === email)
-        if (result) {
-            alert("User with the same email already exists")
-            return false
-        }
+    const isEmailTaken = await checkEmail(email)
+    if (isEmailTaken) {
+        alert("User with the same email already exists")
+        return false
     }
 
-    const isUsernameTaken = users.some(user => user.username === username)
+    const isUsernameTaken = await checkUsername(username)
     if (isUsernameTaken) {
         alert("User with the same username already exists")
         return false
     }
 
-    user = { username: username, email: email, password: password, age: null, height: null, weight: null, photo: null }
+    user = {username: username, email: email, password: password, age: null, bmi: null, height: null, image: null}
 
-    if (users) {
-        users.push(user)
-    }
-    else {
-        users = [user]
-    }
-    localStorage.setItem("users", JSON.stringify(users))
+    fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
     localStorage.setItem("current_user", JSON.stringify(user))
     window.location = '../profile/profile.html'
 }
