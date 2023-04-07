@@ -65,7 +65,7 @@ async function validateForm() {
         return false
     }
 
-    user = {username: username, email: email, password: password, age: null, bmi: null, height: null, image: null}
+    user = {username: username, email: email, password: password, age: null, height: null, image: null}
 
     fetch('http://localhost:3000/users', {
         method: 'POST',

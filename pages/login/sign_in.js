@@ -1,5 +1,3 @@
-const users = JSON.parse(localStorage.getItem("users"))
-
 async function getUsers() {
     const response = await fetch('http://localhost:3000/users', { method: 'GET' });
     return await response.json();

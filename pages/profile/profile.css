@@ -5,7 +5,6 @@ body {
 header {
     display: flex;
     align-items: center;
-    /*justify-content: space-between;*/
     padding: 30px 80px 0 80px;
 }
 
@@ -142,17 +141,60 @@ section {
     color: #636E75;
 }
 
-.user-info > img {
-    width: 146px;
-    height: 149px;
+.user-photo {
+    display: flex;
+    flex-direction: column;
+    max-width: 190px;
+}
+
+.user-photo > img {
+    width: 145px;
+    height: 150px;
     margin-right: 45px;
+}
+
+.user-photo input {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 2px solid var(--main-yellow);
+    border-radius: 12px;
+    display: inline-block;
+    cursor: pointer;
+    font-family: 'Sen', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--main-yellow);
+    width: 145px;
+    height: fit-content;
+    padding: 5px 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+.user-photo > button {
+    width: 145px;
+    height: 30px;
+    border: none;
+    background-color: var(--main-yellow);
+    border-radius: 12px;
+    font-family: 'Sen', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--main-background);
+    cursor: pointer;
+}
+
+.user-photo > button:hover {
+    background-color: var(--main-yellow-hover);
 }
 
 .user-info {
     display: flex;
 }
 
-.user-info button {
+.personalize-user-info button {
     background: none;
     border: none;
     cursor: pointer;
@@ -173,7 +215,12 @@ section {
     margin-right: 10px;
 }
 
-.personalize-user-info.edit input, .personal-stats.edit input {
+.user-photo input, .user-photo button, .custom-file-upload {
+    display: none;
+}
+
+.personalize-user-info.edit input, .personal-stats.edit input,
+.user-photo.edit button, .custom-file-upload.edit {
     display: block;
 }
 
@@ -188,6 +235,10 @@ section {
 .personal-stats p:first-child {
     display: flex;
     gap: 10px
+}
+
+.personal-stats > div {
+    display: flex;
 }
 
 .statistics {
@@ -248,7 +299,7 @@ section {
         width: 100%
     }
 
-    .navigation-container > li >a {
+    .navigation-container > li > a {
         font-size: 30px;
     }
 

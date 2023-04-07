@@ -233,8 +233,8 @@
         document.querySelector(".circle-image").style.display = "flex"
         document.querySelector(".navigation-container li:first-child a").href = "../../pages/authorized/authorized.html"
 
-        if (user.photo) {
-            document.querySelector(".circle-image img").src = user.photo
+        if (user.image) {
+            document.querySelector(".circle-image img").src = user.image
         }
         else {
             document.querySelector(".circle-image img").src = "../../assets/svg/default-avatar.svg"

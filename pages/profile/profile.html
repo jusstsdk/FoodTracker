@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;500&family=Sen:wght@400;700&display=swap"
           rel="stylesheet">
     <script defer src="profile.js"></script>
+    <script defer src="upload_photo.js"></script>
 </head>
 <body>
 <header>
@@ -28,19 +29,20 @@
             <li><a href="../recipes/recipes.html">Recipes</a></li>
         </ul>
     </nav>
-<!--    <a href="/profile.html" class="circle-image">-->
-<!--        <img src="/assets/svg/avatar.svg" alt=""/>-->
-<!--    </a>-->
     <div class="sign-out">
         <a href="../main_page/main_page.html">Sign out</a>
     </div>
-
 </header>
 
 <section>
     <div class="profile-info">
         <div class="user-info">
-            <img src="" alt=""/>
+            <div class="user-photo">
+                <img src="" alt=""/>
+                <label for="fileInput" class="custom-file-upload">Choose file</label>
+                <input type="file" id="fileInput">
+                <button type="button" onclick="uploadFile()">Upload</button>
+            </div>
             <div class="personalize-user-info">
                 <p><span></span>
                     <input id="edit_username" type="text">
@@ -52,8 +54,10 @@
         </div>
         <div class="personal-stats">
             <p>BMI: 17<img src="" alt=""/></p>
-            <input id="edit_height" type="number">
-            <input id="edit_weight" type="number">
+            <div>
+                <input id="edit_height" type="number">
+                <input id="edit_weight" type="number">
+            </div>
             <p>170cm, 50 kg</p>
         </div>
     </div>
