@@ -89,7 +89,7 @@ sign_out.addEventListener('click', () => {
 const fileInput = document.getElementById('fileInput');
 const fileLabel = document.querySelector('.custom-file-upload');
 
-fileInput.addEventListener('change', function() {
+fileInput.addEventListener('change', function () {
     fileLabel.innerHTML = fileInput.files[0].name;
 });
 
@@ -107,6 +107,17 @@ edit_button.addEventListener("click", async () => {
 
 
     if (user_info.classList.contains("edit")) {
+        if (user.username === edit_username.value &&
+            user.age === edit_age.value &&
+            user.height === edit_height.value &&
+            user.weight === edit_weight.value) {
+            user_info.classList.toggle("edit")
+            user_photo.classList.toggle("edit")
+            personal_stats.classList.toggle("edit")
+            file_upload.classList.toggle("edit")
+            return
+        }
+
         const isUsernameTaken = await checkUsername(edit_username.value)
         if (isUsernameTaken && (user.username !== edit_username.value)) {
             alert("User with the same username already exists")

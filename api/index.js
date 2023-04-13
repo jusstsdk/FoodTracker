@@ -22,6 +22,8 @@ const server = http.createServer(async (req, res) => {
 
     if (req.url === '/recipes') {
         await getRecipes(res)
+    } else if (req.url.startsWith('/recipes/category/')) {
+        await getRecipesByCategoryId(req, res);
     } else if (req.url === '/categories') {
         await getCategories(res)
     } else if (req.url.startsWith('/favorites/')) {
@@ -56,6 +58,19 @@ async function getRecipes(res) {
         res.end(JSON.stringify(result.rows))
     } finally {
         client.release()
+    }
+}
+
+async function getRecipesByCategoryId(req, res) {
+    const categoryId = req.url.split('/').pop();
+    const client = await pool.connect();
+
+    try {
+        const result = await client.query('SELECT * FROM recipes WHERE category_id = $1', [categoryId]);
+        res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+        res.end(JSON.stringify(result.rows));
+    } finally {
+        client.release();
     }
 }
 
