@@ -5,14 +5,15 @@ body {
 header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 30px 80px 0 80px;
+    /*width: fit-content;*/
 }
 
 .title-container {
     width: fit-content;
     display: flex;
     gap: 13px;
-    flex: 1;
 }
 
 .title-container > img {
@@ -25,7 +26,7 @@ header {
     font-size: 34px;
     line-height: 41px;
     letter-spacing: 0.02em;
-    color: #4E4140;
+    color: var(--main-brown);
 }
 
 nav {
@@ -33,7 +34,6 @@ nav {
     flex-wrap: wrap;
     align-items: center;
     justify-self: left;
-    flex: 3;
     margin-left: 45px;
 }
 
@@ -50,7 +50,7 @@ nav {
     font-size: 16px;
     line-height: 16px;
     letter-spacing: 0.01em;
-    color: #4E4140;
+    color: var(--main-brown);
     cursor: pointer;
     text-decoration: none;
 }
@@ -90,6 +90,7 @@ nav {
     text-decoration: none;
     padding: 9px 16px;
     box-sizing: border-box;
+    align-self: flex-end;
 }
 
 .sign-out > a:hover {
@@ -109,12 +110,6 @@ nav > button > img {
 section {
     max-width: 1250px;
     margin: auto;
-}
-
-@media (max-width: 1440px) {
-    section {
-        width: 1200px;
-    }
 }
 
 .profile-info {
@@ -248,16 +243,6 @@ section {
     padding: 0 70px;
 }
 
-@media (max-width: 1024px) {
-    section {
-        width: 800px;
-    }
-
-    .statistics {
-        flex-direction: column;
-    }
-}
-
 .statistics h1 {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
@@ -273,7 +258,18 @@ section {
     align-items: center;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+    .statistics {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1040px) {
+    section {
+        width: 800px;
+    }
+
     .menu__button {
         display: block;
     }
@@ -289,6 +285,7 @@ section {
 
     header {
         flex-direction: column;
+        width: fit-content;
     }
 
     .title-container {
@@ -313,9 +310,9 @@ section {
         border-bottom: 1px solid #4E4140;
     }
 
-    .circle-image {
+    .sign-out {
         position: absolute;
         top: 30px;
-        right: 50px;
+        right: 20px;
     }
 }

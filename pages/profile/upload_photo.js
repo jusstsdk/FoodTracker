@@ -41,5 +41,7 @@ const uploadButton = document.querySelector(".user-photo button")
 uploadButton.addEventListener("click", () => {
     if (uploadButton.innerHTML === 'Upload') {
         uploadButton.innerHTML = 'Uploaded'
+        uploadButton.disabled = true
+        uploadButton.style.backgroundColor = "#E7B670"
     }
 })

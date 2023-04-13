@@ -9,12 +9,42 @@ header {
     padding: 30px 80px 0 80px;
 }
 
+.container {
+    display: flex;
+    width: fit-content;
+    align-self: center;
+    margin: auto;
+}
+
+.dropdown-container {
+    margin-top: 50px;
+}
+
+.dropdown-container > select {
+    background-color: var(--secondary-color);
+    color: var(--main-background);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    width: 120px;
+    height: 40px;
+    padding: 2px 8px;
+    margin-right: 50px;
+}
+
+.dropdown-container > select > option {
+    background-color: var(--main-background);
+    border-radius: 10px;
+    color: var(--secondary-color);
+    font-size: 16px;
+}
+
 .recipes-container {
     display: grid;
     grid-template-columns: 250px 250px 250px;
-    grid-template-rows: 270px 270px;
     grid-gap: 60px 120px;
-    justify-content: center;
     margin-top: 50px;
 }
 
@@ -24,17 +54,18 @@ header {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    height: fit-content;
     padding-bottom: 15px;
     cursor: pointer;
     transition: 0.3s all;
+    height: 100%;
+    justify-content: space-between;
 }
 
 .recipe-info:hover {
     box-shadow: 0 4px 9px rgba(78, 65, 64, 0.25);
 }
 
-.recipe-info > div {
+.recipe-info > div:first-child {
     background: #FAF8F6;
     border: 1px solid var(--grey-border);
     border-radius: 10px;
@@ -46,33 +77,48 @@ header {
     align-self: center;
 }
 
-.recipe-info > div > img {
+.recipe-info > div:first-child > img {
     height: 90%;
     width: auto;
     margin: 10px;
 }
 
-.recipes-container a {
+.recipe-main {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 17px;
+}
+
+.recipe-main > img {
+    width: 24px;
+    align-self: flex-end;
+}
+
+.recipe-title {
+    padding-top: 10px;
+}
+
+.recipe-title > a {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 24px;
     line-height: 36px;
     letter-spacing: 0.04em;
     color: var(--main-brown);
-    margin: 7px 0 0 17px;
+    margin-top: 7px;
     text-decoration: none;
 }
 
-.recipes-container p {
+.recipe-title > p {
     font-family: 'Sen', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
     color: #636E75;
-    margin: 0 0 0 17px;
+    margin: 0;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1340px) {
     .recipes-container {
         grid-template-columns: 250px 250px;
     }

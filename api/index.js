@@ -22,6 +22,14 @@ const server = http.createServer(async (req, res) => {
 
     if (req.url === '/recipes') {
         await getRecipes(res)
+    } else if (req.url === '/categories') {
+        await getCategories(res)
+    } else if (req.url.startsWith('/favorites/')) {
+        await getFavorites(req, res)
+    } else if (req.method === 'POST' && req.url === '/favorites') {
+        await addFavorite(req, res)
+    } else if (req.method === 'DELETE' && req.url === '/favorites') {
+        await deleteFavorite(req, res)
     } else if (req.method === 'GET' && req.url === '/users') {
         await getUsers(res)
     } else if (req.method === 'POST' && req.url === '/users') {
@@ -48,6 +56,77 @@ async function getRecipes(res) {
         res.end(JSON.stringify(result.rows))
     } finally {
         client.release()
+    }
+}
+
+async function getCategories(res) {
+    const client = await pool.connect()
+    try {
+        const result = await client.query('SELECT * FROM categories')
+        res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
+        res.end(JSON.stringify(result.rows))
+    } finally {
+        client.release()
+    }
+}
+
+async function getFavorites(req, res) {
+    const userId = req.url.split('/').pop();
+    const client = await pool.connect()
+    try {
+        const result = await client.query('SELECT recipe_id FROM favorites WHERE user_id = $1', [userId])
+        res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
+        res.end(JSON.stringify(result.rows))
+    } finally {
+        client.release()
+    }
+}
+
+async function addFavorite(req, res) {
+    const client = await pool.connect();
+    try {
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        });
+        req.on('end', async () => {
+            const {user_id, recipe_id} = JSON.parse(data);
+            const result = await client.query(
+                'INSERT INTO favorites (user_id, recipe_id) VALUES ($1, $2)',
+                [user_id, recipe_id]
+            );
+            res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+            res.end(JSON.stringify(result.rows[0]));
+        });
+    } catch (err) {
+        res.writeHead(500, {'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*'});
+        res.end('Internal Server Error');
+    } finally {
+        client.release();
+    }
+}
+
+async function deleteFavorite(req, res) {
+    const client = await pool.connect();
+    try {
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        });
+        req.on('end', async () => {
+            const {user_id, recipe_id} = JSON.parse(data);
+            const result = await client.query(
+                'DELETE FROM favorites WHERE user_id = $1 AND recipe_id = $2',
+                [user_id, recipe_id]
+            );
+            res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+            res.end(JSON.stringify(result.rows[0]));
+        });
+    } catch (err) {
+        res.writeHead(500, {'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*'});
+        res.end('Internal Server Error');
+    } finally {
+        client.release();
     }
 }
 
