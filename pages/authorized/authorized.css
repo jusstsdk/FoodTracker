@@ -164,7 +164,7 @@ section h3 {
     outline: none;
 }
 
-.food-searcher > div:not(.food-searcher__input) {
+.search-result > div {
     display: flex;
     background: var(--main-block);
     border: 1px solid #636E7540;
@@ -173,12 +173,12 @@ section h3 {
     box-sizing: border-box;
     margin-top: 22px;
     width: 250px;
-    height: 45px;
+    height: fit-content;
     align-items: center;
     justify-content: space-between;
 }
 
-.food-searcher p {
+.search-result p {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -187,7 +187,7 @@ section h3 {
     color: var(--main-brown);
 }
 
-.food-searcher span {
+.search-result span {
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -213,6 +213,7 @@ section h3 {
 .bottom-container {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
 }
 
 .summary {

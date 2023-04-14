@@ -26,6 +26,10 @@ const server = http.createServer(async (req, res) => {
         await getRecipesByCategoryId(req, res);
     } else if (req.url === '/categories') {
         await getCategories(res)
+    } else if (req.url === '/foodlist') {
+        await getFoodList(res)
+    } else if (req.method === 'POST' && req.url.startsWith('/meals_history/')) {
+        await updateMealsHistory(req, res)
     } else if (req.url.startsWith('/favorites/')) {
         await getFavorites(req, res)
     } else if (req.method === 'POST' && req.url === '/favorites') {
@@ -38,8 +42,16 @@ const server = http.createServer(async (req, res) => {
         await addUser(req, res);
     } else if (req.method === 'PUT' && req.url.startsWith('/users/') && req.url.endsWith('/image')) {
         await updateUserImage(req, res);
+    } else if (req.method === 'PUT' && req.url.startsWith('/users/') && req.url.endsWith('/weight')) {
+        await updateUserWeight(req, res);
     } else if (req.method === 'PUT' && req.url.startsWith('/users/')) {
         await updateUser(req, res);
+    } else if (req.method === 'GET' && req.url.startsWith('/meals/user/')) {
+        await getUserMeals(req, res)
+    } else if (req.method === 'GET' && req.url.startsWith('/water/user/')) {
+        await getUserWater(req, res)
+    } else if (req.method === 'POST' && req.url.startsWith('/water_history/')) {
+        await addUserWater(req, res)
     } else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end('Not Found');
@@ -64,7 +76,6 @@ async function getRecipes(res) {
 async function getRecipesByCategoryId(req, res) {
     const categoryId = req.url.split('/').pop();
     const client = await pool.connect();
-
     try {
         const result = await client.query('SELECT * FROM recipes WHERE category_id = $1', [categoryId]);
         res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
@@ -219,6 +230,111 @@ async function updateUserImage(req, res) {
                 [image, id]
             );
 
+            res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+            res.end(JSON.stringify(result.rows[0]));
+        });
+    } catch (err) {
+        res.writeHead(500, {'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*'});
+        res.end('Internal Server Error');
+    } finally {
+        client.release();
+    }
+}
+
+async function updateUserWeight(req, res) {
+    const client = await pool.connect();
+    try {
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        });
+        req.on('end', async () => {
+            const {id, weight} = JSON.parse(data);
+            const result = await client.query(
+                'UPDATE users SET weight = $1 WHERE id = $2 RETURNING *',
+                [weight, id]
+            );
+            res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+            res.end(JSON.stringify(result.rows[0]));
+        });
+    } catch (err) {
+        res.writeHead(500, {'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*'});
+        res.end('Internal Server Error');
+    } finally {
+        client.release();
+    }
+}
+
+async function getUserMeals(req, res) {
+    const userId = req.url.split('/').pop();
+    const client = await pool.connect();
+    try {
+        const result = await client.query('SELECT meals_history.meal_id, food_list.name, food_list.calories ' +
+            'FROM meals_history JOIN food_list ON food_list.id = meals_history.food_id ' +
+            'WHERE meals_history.user_id = $1 AND date_mark = CURRENT_DATE', [userId]);
+        res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+        res.end(JSON.stringify(result.rows));
+    } finally {
+        client.release();
+    }
+}
+
+async function getUserWater(req, res) {
+    const userId = req.url.split('/').pop();
+    const client = await pool.connect();
+    try {
+        const result = await client.query('SELECT value FROM water_history WHERE user_id = $1 AND date_mark = CURRENT_DATE', [userId]);
+        res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+        res.end(JSON.stringify(result.rows));
+    } finally {
+        client.release();
+    }
+}
+
+async function addUserWater(req, res) {
+    const client = await pool.connect();
+    try {
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        });
+        req.on('end', async () => {
+            const {user, value} = JSON.parse(data);
+            const result = await client.query(
+                'INSERT INTO water_history (user_id, value) VALUES ($1, $2)', [user, value]);
+            res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+            res.end(JSON.stringify(result.rows[0]));
+        });
+    } catch (err) {
+        res.writeHead(500, {'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*'});
+        res.end('Internal Server Error');
+    } finally {
+        client.release();
+    }
+}
+
+async function getFoodList(res) {
+    const client = await pool.connect()
+    try {
+        const result = await client.query('SELECT * FROM food_list')
+        res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
+        res.end(JSON.stringify(result.rows))
+    } finally {
+        client.release()
+    }
+}
+
+async function updateMealsHistory(req, res) {
+    const client = await pool.connect();
+    try {
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        });
+        req.on('end', async () => {
+            const {user, meal, food} = JSON.parse(data);
+            const result = await client.query(
+                'INSERT INTO meals_history (user_id, meal_id, food_id) VALUES ($1, $2, $3)', [user, meal, food]);
             res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
             res.end(JSON.stringify(result.rows[0]));
         });

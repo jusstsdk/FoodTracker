@@ -82,6 +82,5 @@ async function validateForm() {
             console.error(error);
         });
 
-    localStorage.setItem("current_user", JSON.stringify(user))
-    window.location = '../profile/profile.html'
+    window.location = '../login/sign_in.html'
 }

@@ -28,7 +28,6 @@ async function checkUsername(username) {
     }
 }
 
-
 const user = JSON.parse(localStorage.getItem("current_user"))
 
 if (user.age) {
@@ -61,7 +60,7 @@ function calculateBMI(height, weight) {
 }
 
 bmi = calculateBMI(user.height, user.weight)
-if (bmi > 0) {
+if (bmi > 0 && isFinite(parseFloat(bmi))) {
     document.querySelector(".personal-stats p:first-child").innerHTML = 'BMI: ' + bmi
 } else {
     document.querySelector(".personal-stats p:first-child").innerHTML = 'BMI: --'
