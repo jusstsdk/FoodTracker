@@ -100,7 +100,7 @@ async function getFavorites(req, res) {
     const userId = req.url.split('/').pop();
     const client = await pool.connect()
     try {
-        const result = await client.query('SELECT recipe_id FROM favorites WHERE user_id = $1', [userId])
+        const result = await client.query('SELECT favorites.recipe_id, recipes.* FROM favorites JOIN recipes ON recipes.id = favorites.recipe_id WHERE favorites.user_id = $1', [userId])
         res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
         res.end(JSON.stringify(result.rows))
     } finally {

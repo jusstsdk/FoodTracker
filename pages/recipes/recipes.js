@@ -100,6 +100,10 @@ fetch('http://localhost:3000/categories')
         option.text = "All"
         option.value = '0'
         dropdown.appendChild(option)
+        let likes = document.createElement("option")
+        likes.text = "Favorites"
+        likes.value = "favorite"
+        dropdown.appendChild(likes)
         data.forEach(category => {
             let tmp = document.createElement("option")
             tmp.text = category.name
@@ -124,7 +128,17 @@ function filterRecipesByCategory(category) {
                 console.log(data)
             })
             .catch(error => console.error(error));
-    } else {
+    } else if (category === 'favorite') {
+        fetch('http://localhost:3000/favorites/' + user.id)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(recipe => {
+                    container.appendChild(createRecipeInfo(recipe))
+                });
+            })
+            .catch(error => console.error(error));
+    }
+    else {
         fetch('http://localhost:3000/recipes/category/' + category)
             .then(response => response.json())
             .then(data => {
