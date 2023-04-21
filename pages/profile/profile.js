@@ -114,6 +114,7 @@ edit_button.addEventListener("click", async () => {
             user_photo.classList.toggle("edit")
             personal_stats.classList.toggle("edit")
             file_upload.classList.toggle("edit")
+            document.querySelector(".personalize-user-info button img").src = "/assets/svg/edit-icon.svg"
             return
         }
 
@@ -157,6 +158,7 @@ edit_button.addEventListener("click", async () => {
         user.weight = edit_weight.value
 
         localStorage.setItem("current_user", JSON.stringify(user))
+        document.querySelector(".personalize-user-info button img").src = "/assets/svg/edit-icon.svg"
         window.location.reload()
     }
 
@@ -164,6 +166,8 @@ edit_button.addEventListener("click", async () => {
     user_photo.classList.toggle("edit")
     personal_stats.classList.toggle("edit")
     file_upload.classList.toggle("edit")
+
+    document.querySelector(".personalize-user-info button img").src = "/assets/svg/icon-check.svg"
 
     edit_username.value = user.username
     edit_age.value = user.age

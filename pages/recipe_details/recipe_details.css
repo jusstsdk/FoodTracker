@@ -71,7 +71,7 @@ section {
     width: 500px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .recipe-container {
         display: flex;
         flex-direction: column-reverse;

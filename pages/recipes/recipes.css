@@ -45,7 +45,7 @@ header {
     display: grid;
     grid-template-columns: 250px 250px 250px;
     grid-gap: 60px 120px;
-    margin-top: 50px;
+    margin: 50px 0;
 }
 
 .recipe-info {
@@ -78,7 +78,7 @@ header {
 }
 
 .recipe-info > div:first-child > img {
-    height: 90%;
+    height: 85%;
     width: auto;
     margin: 10px;
 }

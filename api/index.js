@@ -52,6 +52,10 @@ const server = http.createServer(async (req, res) => {
         await getUserWater(req, res)
     } else if (req.method === 'POST' && req.url.startsWith('/water_history/')) {
         await addUserWater(req, res)
+    } else if (req.method === 'GET' && req.url.startsWith('/weight_history/user/')) {
+        await getUserWeightHistory(req, res)
+    } else if (req.method === 'GET' && req.url.startsWith('/water_history/user/')) {
+        await getUserWaterHistory(req, res)
     } else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end('Not Found');
@@ -341,6 +345,30 @@ async function updateMealsHistory(req, res) {
     } catch (err) {
         res.writeHead(500, {'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*'});
         res.end('Internal Server Error');
+    } finally {
+        client.release();
+    }
+}
+
+async function getUserWeightHistory(req, res) {
+    const userId = req.url.split('/').pop();
+    const client = await pool.connect();
+    try {
+        const result = await client.query('SELECT weight, date_mark FROM weights WHERE user_id = $1 ORDER BY date_mark DESC LIMIT 10', [userId]);
+        res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+        res.end(JSON.stringify(result.rows));
+    } finally {
+        client.release();
+    }
+}
+
+async function getUserWaterHistory(req, res) {
+    const userId = req.url.split('/').pop();
+    const client = await pool.connect();
+    try {
+        const result = await client.query('SELECT value, date_mark FROM water_history WHERE user_id = $1 ORDER BY date_mark DESC LIMIT 10', [userId]);
+        res.writeHead(200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
+        res.end(JSON.stringify(result.rows));
     } finally {
         client.release();
     }

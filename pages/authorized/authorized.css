@@ -143,6 +143,7 @@ section h3 {
     border: 1px solid #636E7540;
     border-radius: 20px;
     padding: 5px 5px 20px;
+    width: fit-content;
 }
 
 .food-searcher input {
@@ -162,6 +163,23 @@ section h3 {
 .food-searcher input:focus {
     border: 1px solid grey;
     outline: none;
+}
+
+.search-result {
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.search-result::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em;
+}
+.search-result::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+.search-result::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.25em;
 }
 
 .search-result > div {

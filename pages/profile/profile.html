@@ -11,6 +11,8 @@
           rel="stylesheet">
     <script defer src="profile.js"></script>
     <script defer src="upload_photo.js"></script>
+    <script defer src="charts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <header>
@@ -64,13 +66,14 @@
     <div class="statistics">
         <div>
             <h1>Weight statistics</h1>
-            <img src="/assets/svg/weight-stats.svg"/>
+            <canvas id="weight-chart" width="600" height="400"></canvas>
         </div>
         <div>
             <h1>Water statistics</h1>
-            <img src="/assets/svg/weight-stats.svg"/>
+            <canvas id="water-chart" width="600" height="400"></canvas>
         </div>
     </div>
 
 </section>
+
 </body>
